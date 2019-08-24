@@ -48,7 +48,6 @@ def main(argv):
     labels = "English only", "Spanish", "Other Indo-European languages", "Asian and Pacific Island languages", "other"
     sizes = [english_only, spanish, european, asian,other]
     
-    
     fig1, ax1 = plt.subplots()
     ax1.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=False, startangle=242)
     ax1.axis('equal') 
