@@ -34,8 +34,11 @@ def main(argv):
     location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
     location = location + os.sep + "ss13hil.csv"
     pums_data = pd.read_csv(location)
+      
+    # figure for containing all the subplots
+    figure = plt.figure(figsize=(12, 8))
     
-    # Print Pie chart
+    # Prepare data for pie chart
     gp = pums_data.groupby(['HHL'])
     totalSpokenlanguages = len(pums_data["HHL"].dropna())
     
@@ -57,25 +60,20 @@ def main(argv):
     labels = "English only", "Spanish", "Other Indo-European languages", "Asian and Pacific Island languages", "other"
     sizes = [english_only, spanish, european, asian,other]
     
-    
-    # figure for containing all the subplots
-    figure = plt.figure(figsize=(12, 8))
     # Add the ie chart subplot
-    
     ax1 = figure.add_subplot(2, 2, 1)
     ax1.pie(sizes, shadow=False, startangle=242)
-    ax1.axis('equal')
-    ax1.pie(sizes, shadow=False, startangle=242)
+    ax1.axis('equal')    
     ax1.set_ylabel('HHL')
     ax1.legend(labels, loc="upper left")
     ax1.title.set_text("Household Languages")
-        
+    
+    # Histogram 
     ax2 = figure.add_subplot(2, 2, 2)
     ax2.hist(pums_data["HINCP"].dropna(),bins=np.logspace(np.log10(1),np.log10(10000000), 50), facecolor='green', alpha=0.5)
     ax2.title.set_text("Distribution of Houshold Income")
     ax2.set_xscale("log")
    
-
     
      # Plot the household vehicle data
     # Get the household vehicles data
