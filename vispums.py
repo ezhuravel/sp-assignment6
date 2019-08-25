@@ -9,6 +9,7 @@ import os
 import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy import stats
 
 # Create mappings for easy TAXP transformation
 mappings = np.append(np.array([0, np.nan, 1]), np.arange(50, 1050, 50))
@@ -70,10 +71,11 @@ def main(argv):
     
     # Histogram 
     ax2 = figure.add_subplot(2, 2, 2)
-    ax2.hist(pums_data["HINCP"].dropna(),bins=np.logspace(np.log10(1),np.log10(10000000), 50), facecolor='green', alpha=0.5)
+    pums_data["HINCP"].dropna().plot.kde()
+    
+    ax2.hist(pums_data["HINCP"].dropna(), normed=True, bins=np.logspace(np.log10(1),np.log10(10000000), 50), facecolor='green', alpha=0.5)
     ax2.title.set_text("Distribution of Houshold Income")
     ax2.set_xscale("log")
-   
     
      # Plot the household vehicle data
     # Get the household vehicles data
