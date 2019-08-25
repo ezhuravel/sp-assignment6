@@ -9,7 +9,6 @@ import os
 import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy import stats
 
 # Create mappings for easy TAXP transformation
 mappings = np.append(np.array([0, np.nan, 1]), np.arange(50, 1050, 50))
@@ -61,7 +60,7 @@ def main(argv):
     labels = "English only", "Spanish", "Other Indo-European languages", "Asian and Pacific Island languages", "other"
     sizes = [english_only, spanish, european, asian,other]
     
-    # Add the ie chart subplot
+    # Add the pie chart subplot
     ax1 = figure.add_subplot(2, 2, 1)
     ax1.pie(sizes, shadow=False, startangle=242)
     ax1.axis('equal')    
@@ -71,11 +70,15 @@ def main(argv):
     
     # Histogram 
     ax2 = figure.add_subplot(2, 2, 2)
-    pums_data["HINCP"].dropna().plot.kde()
+    ax2.set_ylabel('Density')
+    ax2.set_xlabel('Houshold Income ($) - Log Scaled')
+    pums_data["HINCP"].dropna().plot.density()
     
-    ax2.hist(pums_data["HINCP"].dropna(), normed=True, bins=np.logspace(np.log10(1),np.log10(10000000), 50), facecolor='green', alpha=0.5)
+    ax2.hist(pums_data["HINCP"].dropna(), stacked=True, density=True, bins=np.logspace(np.log10(10),np.log10(10000000), 50), facecolor='green', alpha=0.5)
+
     ax2.title.set_text("Distribution of Houshold Income")
     ax2.set_xscale("log")
+    ax2.set_ylim([0,0.000025])
     
      # Plot the household vehicle data
     # Get the household vehicles data
