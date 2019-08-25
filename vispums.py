@@ -119,7 +119,7 @@ def main(argv):
 
     # Set layout to tight, and save as png
     plt.tight_layout()
-    #plt.savefig("pums.png", type='png')
+    plt.savefig("pums.png", type='png')
     plt.show()
      
 if __name__ == "__main__":
