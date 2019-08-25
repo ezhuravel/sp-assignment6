@@ -72,7 +72,7 @@ def main(argv):
     ax2 = figure.add_subplot(2, 2, 2)
     ax2.set_ylabel('Density')
     ax2.set_xlabel('Houshold Income ($) - Log Scaled')
-    pums_data["HINCP"].dropna().plot.density()
+    pums_data["HINCP"].dropna().plot.kde(color='k', linestyle='--')
     
     ax2.hist(pums_data["HINCP"].dropna(), density=True, bins=np.logspace(np.log10(10),np.log10(10000000), 100), facecolor='green', alpha=0.5)
 
