@@ -74,7 +74,7 @@ def main(argv):
     ax2.set_xlabel('Houshold Income ($) - Log Scaled')
     pums_data["HINCP"].dropna().plot.density()
     
-    ax2.hist(pums_data["HINCP"].dropna(), stacked=True, density=True, bins=np.logspace(np.log10(10),np.log10(10000000), 50), facecolor='green', alpha=0.5)
+    ax2.hist(pums_data["HINCP"].dropna(), density=True, bins=np.logspace(np.log10(10),np.log10(10000000), 100), facecolor='green', alpha=0.5)
 
     ax2.title.set_text("Distribution of Houshold Income")
     ax2.set_xscale("log")
